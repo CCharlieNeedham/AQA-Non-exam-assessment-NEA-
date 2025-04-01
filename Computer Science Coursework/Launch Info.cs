@@ -151,7 +151,7 @@
                 rocketYComponentLength * 2,
                 180,
                 trajectorySweepAngle);
-                
+
             achievedAltitudeLabel.Location = new Point(launchXLocation, launchYLocation - rocketYComponentLength - 20);
 
         }
@@ -173,6 +173,11 @@
         private void Launch_Info_Load(object sender, EventArgs e)
         {
             LaunchReport(); //Generate the mission report
+        }
+
+        private void informationButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

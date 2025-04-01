@@ -28,7 +28,7 @@ namespace Computer_Science_Coursework
             UpdateMissionPanel();
         }
 
-        private void NewRocketButton_Click(object sender, EventArgs e)
+        private void newRocketButton_Click(object sender, EventArgs e)
         {
             //Open Rocket Designer form and hide current menu:
             Rocket_Designer rocket_Designer = new Rocket_Designer(spaceAgency);
@@ -36,7 +36,7 @@ namespace Computer_Science_Coursework
             this.Hide();
         }
 
-        private void LoadRocketButton_Click(object sender, EventArgs e)
+        private void loadRocketButton_Click(object sender, EventArgs e)
         {
             //Attempt to load the rocket designer form with exsisting rocket data from a text file:
             string inputRocketName = Interaction.InputBox("Enter a name for the rocket you wish to load", "Load Rocket");
@@ -61,7 +61,7 @@ namespace Computer_Science_Coursework
 
         }
 
-        private void ViewMissionsButton_Click(object sender, EventArgs e)
+        private void viewMissionsButton_Click(object sender, EventArgs e)
         {
             //Open the mission panel to show mission data:
             missionPanel.Show();
@@ -102,9 +102,5 @@ namespace Computer_Science_Coursework
 
         }
 
-        private void MainMenu_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

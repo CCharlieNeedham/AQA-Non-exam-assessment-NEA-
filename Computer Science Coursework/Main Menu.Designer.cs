@@ -58,7 +58,7 @@
             NewRocketButton.TabIndex = 0;
             NewRocketButton.Text = "New Rocket";
             NewRocketButton.UseVisualStyleBackColor = false;
-            NewRocketButton.Click += NewRocketButton_Click;
+            NewRocketButton.Click += newRocketButton_Click;
             // 
             // ViewMissionsButton
             // 
@@ -72,7 +72,7 @@
             ViewMissionsButton.TabIndex = 2;
             ViewMissionsButton.Text = "View Missions";
             ViewMissionsButton.UseVisualStyleBackColor = false;
-            ViewMissionsButton.Click += ViewMissionsButton_Click;
+            ViewMissionsButton.Click += viewMissionsButton_Click;
             // 
             // LoadRocketButton
             // 
@@ -86,7 +86,7 @@
             LoadRocketButton.TabIndex = 1;
             LoadRocketButton.Text = "Load Rocket";
             LoadRocketButton.UseVisualStyleBackColor = false;
-            LoadRocketButton.Click += LoadRocketButton_Click;
+            LoadRocketButton.Click += loadRocketButton_Click;
             // 
             // missionPanel
             // 
@@ -217,7 +217,6 @@
             Name = "MainMenu";
             Text = "-";
             WindowState = FormWindowState.Maximized;
-            Load += MainMenu_Load;
             missionPanel.ResumeLayout(false);
             missionPanel.PerformLayout();
             logoPanel.ResumeLayout(false);

@@ -38,6 +38,7 @@
             targetAltitudeLabel = new Label();
             achievedAltitudeLabel = new Label();
             mainMenuButton = new Button();
+            informationButton = new Button();
             reportGroupBox.SuspendLayout();
             SuspendLayout();
             // 
@@ -142,6 +143,17 @@
             mainMenuButton.UseVisualStyleBackColor = true;
             mainMenuButton.Click += mainMenuButton_Click;
             // 
+            // informationButton
+            // 
+            informationButton.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            informationButton.Location = new Point(1842, 68);
+            informationButton.Name = "informationButton";
+            informationButton.Size = new Size(50, 50);
+            informationButton.TabIndex = 24;
+            informationButton.Text = "ℹ️";
+            informationButton.UseVisualStyleBackColor = true;
+            informationButton.Click += informationButton_Click;
+            // 
             // Launch_Info
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -149,6 +161,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(informationButton);
             Controls.Add(mainMenuButton);
             Controls.Add(achievedAltitudeLabel);
             Controls.Add(targetAltitudeLabel);
@@ -177,5 +190,7 @@
         private Button mainMenuButton;
         private Label finalVelocityLabel;
         private Label labelPotentialEnergy;
+        private Button button1;
+        private Button informationButton;
     }
 }
