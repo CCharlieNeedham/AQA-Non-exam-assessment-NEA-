@@ -42,7 +42,7 @@
 
             }
 
-            achievedAltitudeLabel.Text = achievedAltitudeLabel.Text + Math.Round(rocket.SuborbitalYComponent, 2).ToString() + " Metres";
+            achievedAltitudeLabel.Text = achievedAltitudeLabel.Text + Math.Round(rocket.SuborbitalYComponent, 2).ToString("N0") + " Metres";
 
             //Display an error if the rocket trajectory is to high for the UI to display:
             if (componentY > AstroConstants.ClippingHeight)
@@ -54,7 +54,7 @@
             //Check if the mission was successful or not and update UI:
             if (rocket.MissionAltitudeSuccess(spaceAgency.ActiveMission.Orbital, spaceAgency.ActiveMission.Altitude) == true && rocket.MissionCrewedSuccess(spaceAgency.ActiveMission.Manned) == true)
             {
-                missionStatusLabel.Text = missionStatusLabel.Text + " Mission Success, reward is £" + spaceAgency.ActiveMission.Reward.ToString();
+                missionStatusLabel.Text = missionStatusLabel.Text + " Mission Success, reward is £" + spaceAgency.ActiveMission.Reward.ToString("N0");
                 missionStatusLabel.ForeColor = Color.Green;
                 targetPen.Color = Color.Green;
                 targetAltitudeLabel.ForeColor = Color.Green;
@@ -69,8 +69,10 @@
 
             }
             //Update the UI with the rockets final velocity:
-            finalVelocityLabel.Text = finalVelocityLabel.Text + "Final Velocity: " + Math.Round(rocket.FinalVelocity, 2).ToString() + " m/s";
-            targetAltitudeLabel.Text = targetAltitudeLabel.Text + "Target Altitude: " + spaceAgency.ActiveMission.Altitude.ToString() + " Metres";
+            finalVelocityLabel.Text = finalVelocityLabel.Text + "Final Velocity: " + Math.Round(rocket.FinalVelocity, 2).ToString("N0") + " m/s";
+            targetAltitudeLabel.Text = targetAltitudeLabel.Text + "Target Altitude: " + spaceAgency.ActiveMission.Altitude.ToString("N0") + " Metres";
+            labelKineticEnergy.Text = labelKineticEnergy.Text + "Kinetic Energy: " + Math.Round(rocket.KineticEnergy, 2).ToString("N0") + " Joules";
+            labelPotentialEnergy.Text = labelPotentialEnergy.Text + "Potential Energy: " + Math.Round(rocket.PotentialEnergy, 1).ToString("N0") + " Joules";
         }
 
         private void Launch_Info_Paint(object sender, PaintEventArgs e)

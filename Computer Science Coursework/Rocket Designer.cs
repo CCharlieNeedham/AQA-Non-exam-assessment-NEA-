@@ -296,7 +296,7 @@ namespace Computer_Science_Coursework
             double rocketCost = Math.Round(rocket.calcTotalCost(), 2);//Calculate the total rocket cost and round to two decimal places
 
             //Update the rocket cost label with the new cost:
-            rocketCostLabel.Text = ("Rocket Cost: £" + rocketCost.ToString());
+            rocketCostLabel.Text = ("Rocket Cost: £" + rocketCost.ToString("N0"));
 
             //Change the colour of the label based on if the rocket cost is greater than the bank balance:
             if (rocketCost > spaceAgency.BankBalance)
@@ -322,12 +322,15 @@ namespace Computer_Science_Coursework
                     return;
                 }
 
-                //Add the first stage with a default fuel tank and engine
-                rocket.addStage(fuelTanks[6], rd180, 1);
+                //Add the first stage with a default fuel tank, payload and engine
+                rocket.addStage(fuelTanks[6], rd180, 1);                
                 selectedStage = 0;
                 Stage1Visible(true);
                 stage1Button.Checked = true;
                 RocketControlsVisible(true);
+                rocket.updatePayload(extraSmallPayload);
+                extraSmallPayload.loadTexture();
+
             }
             else if (numOfStages == 1)
             {
@@ -592,13 +595,19 @@ namespace Computer_Science_Coursework
 
         private void launchButton_Click(object sender, EventArgs e)
         {
-            //Deduct the cost of the rocket from the space agency bank balance:
-            spaceAgency.RemoveFunds(rocket.calcTotalCost());
+            double thrustToWeightRatio = rocket.thrustToWeightRatio(); //Calculate the thrust to weight ratio of the rocket
+           
+            rocket.launchRocketData();
+
+            MessageBox.Show(rocketCostLabel.Text +" \nThrust-To-Weight Ratio = " + Math.Round(thrustToWeightRatio,2) + "\nDry Mass = " + Math.Round(rocket.DryMass,2) + "\nWet Mass = " + Math.Round(rocket.WetMass,2), "Rocket Data", MessageBoxButtons.OK);
 
             //Check if the rocket is too heavy to launch:
-            if (rocket.thrustToWeightRatio() > 1)
+            if (thrustToWeightRatio > 1)
             {
                 rocket.launchRocketData();
+
+                //Deduct the cost of the rocket from the space agency bank balance:
+                spaceAgency.RemoveFunds(rocket.calcTotalCost());
 
                 //Update the form graphics and labels (UI), to show launch animation:
                 ControlsVisible(false);
@@ -633,7 +642,7 @@ namespace Computer_Science_Coursework
         {
             //Update the budget label with the space agency bank balance:
             double budget = Math.Round(spaceAgency.BankBalance, 2);
-            budgetLabel.Text = "Budget: £" + budget.ToString();
+            budgetLabel.Text = "Budget: £" + budget.ToString("N0");
         }
 
 

@@ -41,7 +41,7 @@
             missions.Enqueue(new Mission("Suborbital Test Flight", "Launch an unmanned rocket to suborbital space.", 100000, false, false, 100000000));
             missions.Enqueue(new Mission("Low Mars Orbit Satellite", "Deploy a unmanned satellite into low Mars orbit.", 300000, true, false, 500000000));
             missions.Enqueue(new Mission("Low Mars Orbit Manned Mission", "Send astronauts into low Mars orbit for scientific research.", 600000, true, true, 1000000000));
-            missions.Enqueue(new Mission("High Mars Orbit Satellite Deployment", "Deploy a unmanned satellite into high Mars orbit for deep space observation.", 1500000000, true, false, 750000));    
+            missions.Enqueue(new Mission("High Mars Orbit Satellite Deployment", "Deploy a unmanned satellite into high Mars orbit.", 1500000000, true, false, 750000));    
         }
         public void RemoveFunds(double transactionSize)
         { //Method to remove funds from the bank balance for launching rockets

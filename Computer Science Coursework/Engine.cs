@@ -52,7 +52,7 @@ namespace Computer_Science_Coursework
 
         public override string description() //Returns a string with the engine's properties
         {
-            return ("Size: " + diameter.ToString() + "x" + height.ToString() + "Metres \nMass: " + mass.ToString() + "kg \nCost: £" + cost.ToString() + "\n Fuel Type: " + fuelType);
+            return ("Size: " + diameter.ToString("N0") + "x" + height.ToString("N0") + "Metres \nMass: " + mass.ToString("N0") + "kg \nCost: £" + cost.ToString("N0") + "\n Fuel Type: " + fuelType);
         }
      
     }

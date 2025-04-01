@@ -1,4 +1,6 @@
-﻿namespace Computer_Science_Coursework
+﻿using System.Linq.Expressions;
+
+namespace Computer_Science_Coursework
 {
     internal class Rocket
     {
@@ -13,6 +15,9 @@
         private double orbitalXComponent;
         private double suborbitalYComponent;
         private double suborbitalXComponent;
+        private double kineticEnergy;
+        private double potentialEnergy;
+
         private List<Stage> stages = new List<Stage>(); //should not be public
 
         //Public accessors for private fields:
@@ -24,6 +29,9 @@
         public double OrbitalXComponent { get { return orbitalXComponent; } }
         public double SuborbitalYComponent { get { return suborbitalYComponent; } }
         public double SubOrbitalXComponent { get { return suborbitalXComponent;} }
+        public double KineticEnergy { get { return kineticEnergy; } }
+        public double PotentialEnergy { get { return potentialEnergy; } }
+
 
         public List<Stage> Stages
         {
@@ -64,7 +72,8 @@
             this.orbitalYComponent = CalcOrbitalYComponent();
             this.suborbitalXComponent = CalcSuborbitalXComponent(); 
             this.suborbitalYComponent = CalcSuborbitalYComponent();
-
+            this.potentialEnergy = CalcPE(this.maxAltitude, payload.Mass);
+            this.kineticEnergy = CalcKE(payload.Mass, this.finalVelocity);
 
         }
 
@@ -212,6 +221,14 @@
         private double CalcGravityVelocityLoss(double fieldStrength, double time)
         { //Calculate the velocity loss due to gravity over a given time period
             return fieldStrength * time;
+        }
+        private double CalcKE(double mass, double velocity)
+        { //Calculate the kinetic energy at the rockets apogee
+            return 0.5*mass*velocity*velocity;
+        }
+        private double CalcPE(double altitude, double spacecraftMass)
+        { //Calculate the potential energy at the rockets apogee
+            return -AstroConstants.Mass*spacecraftMass/(AstroConstants.Radius + altitude);
         }
         private double CalcDistanceTravelled(double intialVelocity, double finalVeloity, double time) 
         {

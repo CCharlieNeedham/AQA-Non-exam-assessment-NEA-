@@ -11,7 +11,7 @@ namespace Computer_Science_Coursework
             this.DoubleBuffered = true; //Reduce flickering for UI rendering
             InitializeComponent();
             spaceAgency = new SpaceAgency();
-            bankBalanceLabel.Text = "Bank Balance: £" + Math.Round(spaceAgency.BankBalance, 2).ToString();
+            bankBalanceLabel.Text = "Bank Balance: £" + Math.Round(spaceAgency.BankBalance, 2).ToString("N0");
             UpdateMissionPanel();
 
 
@@ -24,7 +24,7 @@ namespace Computer_Science_Coursework
 
             //Create UI elements with exsisting spaceAgency data:
             spaceAgencyTextbox.Text = spaceAgency.name;
-            bankBalanceLabel.Text = "Bank Balance: £" + Math.Round(spaceAgency.BankBalance, 2).ToString();
+            bankBalanceLabel.Text = "Bank Balance: £" + Math.Round(spaceAgency.BankBalance, 2).ToString("N0");
             UpdateMissionPanel();
         }
 
@@ -73,8 +73,8 @@ namespace Computer_Science_Coursework
             {
                 missionTitleLabel.Text = spaceAgency.ActiveMission.Name;
                 MissionDescriptionLabel.Text = spaceAgency.ActiveMission.Description;
-                rewardLabel.Text = ("Reward: £" + spaceAgency.ActiveMission.Reward.ToString());
-                altitudeLabel.Text = ("Altitude: " + spaceAgency.ActiveMission.Altitude.ToString() + " Metres");
+                rewardLabel.Text = ("Reward: £" + spaceAgency.ActiveMission.Reward.ToString("N0"));
+                altitudeLabel.Text = ("Altitude: " + spaceAgency.ActiveMission.Altitude.ToString("N0") + " Metres");
             }
             else
             {

@@ -54,7 +54,7 @@ namespace Computer_Science_Coursework
         }
         public virtual string description() //Returns a string with the component's properties
         {
-            return ("Size: " + diameter.ToString() + "x" + height.ToString() + "Metres \nMass: " + mass.ToString() + "kg \nCost: £" + cost.ToString());
+            return ("Size: " + diameter.ToString("N0") + "x" + height.ToString("N0") + "Metres \nMass: " + mass.ToString("N0") + "kg \nCost: £" + cost.ToString("N0"));
         }
         public void loadTexture() //Trys to load the texture image for the component from the resources
         {

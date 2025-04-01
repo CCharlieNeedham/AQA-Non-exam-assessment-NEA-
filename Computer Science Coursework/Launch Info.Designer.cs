@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Launch_Info));
             reportGroupBox = new GroupBox();
+            labelPotentialEnergy = new Label();
+            labelKineticEnergy = new Label();
             finalVelocityLabel = new Label();
             trajectoryTypeLabel = new Label();
             missionStatusLabel = new Label();
@@ -42,16 +44,38 @@
             // reportGroupBox
             // 
             reportGroupBox.BackColor = Color.Bisque;
+            reportGroupBox.Controls.Add(labelPotentialEnergy);
+            reportGroupBox.Controls.Add(labelKineticEnergy);
             reportGroupBox.Controls.Add(finalVelocityLabel);
             reportGroupBox.Controls.Add(trajectoryTypeLabel);
             reportGroupBox.Controls.Add(missionStatusLabel);
             reportGroupBox.Font = new Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             reportGroupBox.Location = new Point(12, 12);
             reportGroupBox.Name = "reportGroupBox";
-            reportGroupBox.Size = new Size(588, 81);
+            reportGroupBox.Size = new Size(588, 121);
             reportGroupBox.TabIndex = 1;
             reportGroupBox.TabStop = false;
             reportGroupBox.Text = "Launch Report";
+            // 
+            // labelPotentialEnergy
+            // 
+            labelPotentialEnergy.AutoSize = true;
+            labelPotentialEnergy.Font = new Font("Verdana", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelPotentialEnergy.Location = new Point(6, 95);
+            labelPotentialEnergy.Name = "labelPotentialEnergy";
+            labelPotentialEnergy.Size = new Size(135, 18);
+            labelPotentialEnergy.TabIndex = 25;
+            labelPotentialEnergy.Text = "Potential Energy:";
+            // 
+            // labelKineticEnergy
+            // 
+            labelKineticEnergy.AutoSize = true;
+            labelKineticEnergy.Font = new Font("Verdana", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelKineticEnergy.Location = new Point(6, 77);
+            labelKineticEnergy.Name = "labelKineticEnergy";
+            labelKineticEnergy.Size = new Size(119, 18);
+            labelKineticEnergy.TabIndex = 24;
+            labelKineticEnergy.Text = "Kinetic Energy:";
             // 
             // finalVelocityLabel
             // 
@@ -147,10 +171,11 @@
         private GroupBox reportGroupBox;
         private Label missionStatusLabel;
         private Label trajectoryTypeLabel;
-        private Label label1;
+        private Label labelKineticEnergy;
         private Label targetAltitudeLabel;
         private Label achievedAltitudeLabel;
         private Button mainMenuButton;
         private Label finalVelocityLabel;
+        private Label labelPotentialEnergy;
     }
 }
