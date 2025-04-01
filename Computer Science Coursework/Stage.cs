@@ -9,7 +9,7 @@ namespace Computer_Science_Coursework
 {
     internal class Stage 
     {
-        const double OxidizerDensity = 1041; //k/m^3
+        private     const double OxidizerDensity = 1041; //k/m^3
 
         //Fields of Stage class:
         private int numOfEngines;
@@ -31,23 +31,6 @@ namespace Computer_Science_Coursework
             get { return numOfEngines; }
         }
 
-        public double combinedEngineDiameter()
-        {//Returns the combined diameter of all engines in the stage
-            return engine.Diameter * numOfEngines;
-        }
-        public double getDiameter()
-        {//Returns the diameter of the stage
-            return fuelTank.Diameter;
-        }
-        public double getHeight()
-        {//Returns the height of the stage
-            return fuelTank.Height + engine.Height;
-        }
-        public double burnTime()
-        {//Returns the burn time of the stage
-            double time = calcFuelMass() / totalMassFlowRate();
-            return time;
-        }
         public Stage(FuelTank defaultFuelTank, Engine defaultEngine, int stageIndex, int numOfEngines)
         {
             this.numOfEngines = numOfEngines;
@@ -55,30 +38,48 @@ namespace Computer_Science_Coursework
             this.engine = defaultEngine;
             this.stageIndex = stageIndex;
         }
-        public double cost()
+
+        public double CombinedEngineDiameter()
+        {//Returns the combined diameter of all engines in the stage
+            return engine.Diameter * numOfEngines;
+        }
+        public double GetDiameter()
+        {//Returns the diameter of the stage
+            return fuelTank.Diameter;
+        }
+        public double GetHeight()
+        {//Returns the height of the stage
+            return fuelTank.Height + engine.Height;
+        }
+        public double BurnTime()
+        {//Returns the burn time of the stage
+            double time = CalcFuelMass() / TotalMassFlowRate();
+            return time;
+        }
+        public double Cost()
         {//Calculates the cost of the stage
             double enginesCost = engine.Cost * numOfEngines;
             double fuelTankCost = fuelTank.Cost;
             return enginesCost + fuelTankCost;
         }
-        public double calcWetMass()
+        public double CalcWetMass()
         {//Calculates the wet mass of the stage
-            return calcDryMass() + calcFuelMass();
+            return CalcDryMass() + CalcFuelMass();
 
         }
-        public double totalThrust()
+        public double TotalThrust()
         {//Calculates the total thrust of the stage with all engines
             return engine.Thrust * numOfEngines;
         }
-        private double totalMassFlowRate()
+        private double TotalMassFlowRate()
         {//Calculates the total mass flow rate of the stage with all engines
             return engine.MassFlow * numOfEngines;
         }
-        public double calcExhaustVelocity() //m/s
+        public double CalcExhaustVelocity() //m/s
         { //Calculates the total exhaust velocity of the stage with all engines
-            return totalThrust() / totalMassFlowRate();
+            return TotalThrust() / TotalMassFlowRate();
         }
-        private double calcFuelMass()
+        private double CalcFuelMass()
         {
 
             int fuelDensity = (int)engine.FuelType;
@@ -89,12 +90,11 @@ namespace Computer_Science_Coursework
             double fuelMass = (fuelVolume * fuelDensity) + (oxidizerVolume * OxidizerDensity);
             return fuelMass;
         }
-        public double calcDryMass()
+        public double CalcDryMass()
         {//Calculates the dry mass of the stage
-            double output = fuelTank.Mass + (engine.Mass * numOfEngines);
             return fuelTank.Mass + (engine.Mass*numOfEngines);
         }
-        public bool updateFuelTankConfiguration(FuelTank newFuelTank, double connectingStageDiameter, int selectedStage)
+        public bool UpdateFuelTankConfiguration(FuelTank newFuelTank, double connectingStageDiameter, int selectedStage)
         {//Updates the fuel tank configuration of the stage amd returns a boolean value depending on whether the fuel tank was updated successfully
             bool fuelTankUpdated = false;
 
@@ -104,7 +104,7 @@ namespace Computer_Science_Coursework
             {
                     fuelTankUpdated = false;
             } 
-            else if (newFuelTankDiameter >= combinedEngineDiameter())
+            else if (newFuelTankDiameter >= CombinedEngineDiameter())
             {
                 fuelTank = newFuelTank;
                 fuelTankUpdated = true;
@@ -113,7 +113,7 @@ namespace Computer_Science_Coursework
             return fuelTankUpdated;
         }
    
-        public bool updateEngineConfiguration(Engine newEngine)
+        public bool UpdateEngineConfiguration(Engine newEngine)
         {//Updates the engine configuration of the stage and returns a boolean value depending on whether the engine was updated successfully
             bool engineUpdated = false;
 
@@ -134,7 +134,7 @@ namespace Computer_Science_Coursework
             return engineUpdated;
         }
 
-        public bool updateEngineConfiguration(int newNumOfEngines)
+        public bool UpdateEngineConfiguration(int newNumOfEngines)
         {//Updates the engine configuration of the stage and returns a boolean value depending on whether the engine was updated successfully
             bool engineUpdated = false;
 

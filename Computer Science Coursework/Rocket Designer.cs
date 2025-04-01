@@ -180,35 +180,35 @@ namespace Computer_Science_Coursework
         private void CreateToolTips()
         {
             //Create tooltips for engines:
-            descriptionToolTip.SetToolTip(rd180Button, rd180.description());
-            descriptionToolTip.SetToolTip(f1Button, f1.description());
-            descriptionToolTip.SetToolTip(rs25Button, rs25.description());
-            descriptionToolTip.SetToolTip(le7Button, le7.description());
-            descriptionToolTip.SetToolTip(raptorButton, raptor.description());
+            descriptionToolTip.SetToolTip(rd180Button, rd180.Description());
+            descriptionToolTip.SetToolTip(f1Button, f1.Description());
+            descriptionToolTip.SetToolTip(rs25Button, rs25.Description());
+            descriptionToolTip.SetToolTip(le7Button, le7.Description());
+            descriptionToolTip.SetToolTip(raptorButton, raptor.Description());
 
             //Create tooltips for paylaods:
-            descriptionToolTip.SetToolTip(extraSmallPayloadButton, extraSmallPayload.description());
-            descriptionToolTip.SetToolTip(smallPayloadButton, extraSmallPayload.description());
-            descriptionToolTip.SetToolTip(mediumPayloadButton, extraSmallPayload.description());
-            descriptionToolTip.SetToolTip(extraSmallPayloadButton, extraSmallPayload.description());
-            descriptionToolTip.SetToolTip(extraSmallPayloadButton, extraSmallPayload.description());
+            descriptionToolTip.SetToolTip(extraSmallPayloadButton, extraSmallPayload.Description());
+            descriptionToolTip.SetToolTip(smallPayloadButton, extraSmallPayload.Description());
+            descriptionToolTip.SetToolTip(mediumPayloadButton, extraSmallPayload.Description());
+            descriptionToolTip.SetToolTip(extraSmallPayloadButton, extraSmallPayload.Description());
+            descriptionToolTip.SetToolTip(extraSmallPayloadButton, extraSmallPayload.Description());
 
             //Create tooltips for fuel tanks:
-            descriptionToolTip.SetToolTip(fuelTank0Button, fuelTanks[0].description());
-            descriptionToolTip.SetToolTip(fuelTank1Button, fuelTanks[1].description());
-            descriptionToolTip.SetToolTip(fuelTank2Button, fuelTanks[2].description());
-            descriptionToolTip.SetToolTip(fuelTank3Button, fuelTanks[3].description());
-            descriptionToolTip.SetToolTip(fuelTank4Button, fuelTanks[4].description());
-            descriptionToolTip.SetToolTip(fuelTank5Button, fuelTanks[5].description());
-            descriptionToolTip.SetToolTip(fuelTank6Button, fuelTanks[6].description());
-            descriptionToolTip.SetToolTip(fuelTank7Button, fuelTanks[7].description());
-            descriptionToolTip.SetToolTip(fuelTank8Button, fuelTanks[8].description());
-            descriptionToolTip.SetToolTip(fuelTank9Button, fuelTanks[9].description());
-            descriptionToolTip.SetToolTip(fuelTank10Button, fuelTanks[10].description());
-            descriptionToolTip.SetToolTip(fuelTank11Button, fuelTanks[11].description());
-            descriptionToolTip.SetToolTip(fuelTank12Button, fuelTanks[12].description());
-            descriptionToolTip.SetToolTip(fuelTank13Button, fuelTanks[13].description());
-            descriptionToolTip.SetToolTip(fuelTank14Button, fuelTanks[14].description());
+            descriptionToolTip.SetToolTip(fuelTank0Button, fuelTanks[0].Description());
+            descriptionToolTip.SetToolTip(fuelTank1Button, fuelTanks[1].Description());
+            descriptionToolTip.SetToolTip(fuelTank2Button, fuelTanks[2].Description());
+            descriptionToolTip.SetToolTip(fuelTank3Button, fuelTanks[3].Description());
+            descriptionToolTip.SetToolTip(fuelTank4Button, fuelTanks[4].Description());
+            descriptionToolTip.SetToolTip(fuelTank5Button, fuelTanks[5].Description());
+            descriptionToolTip.SetToolTip(fuelTank6Button, fuelTanks[6].Description());
+            descriptionToolTip.SetToolTip(fuelTank7Button, fuelTanks[7].Description());
+            descriptionToolTip.SetToolTip(fuelTank8Button, fuelTanks[8].Description());
+            descriptionToolTip.SetToolTip(fuelTank9Button, fuelTanks[9].Description());
+            descriptionToolTip.SetToolTip(fuelTank10Button, fuelTanks[10].Description());
+            descriptionToolTip.SetToolTip(fuelTank11Button, fuelTanks[11].Description());
+            descriptionToolTip.SetToolTip(fuelTank12Button, fuelTanks[12].Description());
+            descriptionToolTip.SetToolTip(fuelTank13Button, fuelTanks[13].Description());
+            descriptionToolTip.SetToolTip(fuelTank14Button, fuelTanks[14].Description());
         }
 
         private void CreateFuelTanks()
@@ -293,7 +293,7 @@ namespace Computer_Science_Coursework
         }
         private void UpdateRocketCostLabel()
         {
-            double rocketCost = Math.Round(rocket.calcTotalCost(), 2);//Calculate the total rocket cost and round to two decimal places
+            double rocketCost = Math.Round(rocket.CalcTotalCost(), 2);//Calculate the total rocket cost and round to two decimal places
 
             //Update the rocket cost label with the new cost:
             rocketCostLabel.Text = ("Rocket Cost: £" + rocketCost.ToString("N0"));
@@ -323,19 +323,19 @@ namespace Computer_Science_Coursework
                 }
 
                 //Add the first stage with a default fuel tank, payload and engine
-                rocket.addStage(fuelTanks[6], rd180, 1);                
+                rocket.AddStage(fuelTanks[6], rd180, 1);                
                 selectedStage = 0;
                 Stage1Visible(true);
                 stage1Button.Checked = true;
                 RocketControlsVisible(true);
-                rocket.updatePayload(extraSmallPayload);
-                extraSmallPayload.loadTexture();
+                rocket.UpdatePayload(extraSmallPayload);
+                extraSmallPayload.LoadTexture();
 
             }
             else if (numOfStages == 1)
             {
                 //Add the second stage with the same fuel tank and engine as the first stage
-                rocket.addStage(rocket.Stages[0].FuelTank, rocket.Stages[0].Engine, 1);
+                rocket.AddStage(rocket.Stages[0].FuelTank, rocket.Stages[0].Engine, 1);
                 selectedStage = 1;
                 Stage2Visible(true);
                 stage2Button.Checked = true;
@@ -376,7 +376,7 @@ namespace Computer_Science_Coursework
             //Load new texture if not loaded already
             if (rocket.Stages[selectedStage].Engine.TextureLoaded == false)
             {
-                rocket.Stages[selectedStage].Engine.loadTexture();
+                rocket.Stages[selectedStage].Engine.LoadTexture();
             }
 
             //Set new texture 
@@ -421,7 +421,7 @@ namespace Computer_Science_Coursework
             //Load new texture if not loaded already
             if (rocket.Stages[selectedStage].FuelTank.TextureLoaded == false)
             {
-                rocket.Stages[selectedStage].FuelTank.loadTexture();
+                rocket.Stages[selectedStage].FuelTank.LoadTexture();
             }
 
             //Set new texture 
@@ -473,7 +473,7 @@ namespace Computer_Science_Coursework
         private void selectEngine(Engine selectedEngine)
         {
             //Update the engine configuration based on the selected engine:
-            bool engineUpdated = rocket.Stages[selectedStage].updateEngineConfiguration(selectedEngine);
+            bool engineUpdated = rocket.Stages[selectedStage].UpdateEngineConfiguration(selectedEngine);
 
             if (engineUpdated == true)
             {
@@ -494,7 +494,7 @@ namespace Computer_Science_Coursework
             FuelTank newFuelTank = fuelTanks[fuelTankTag]; //Get the selected fuel tank based on the button clicked
 
             //Update the fuel tank configuration based on the selected fuel tank:
-            bool fuelTankUpdated = rocket.Stages[selectedStage].updateFuelTankConfiguration(newFuelTank, rocket.stageSizeRestraint(selectedStage), selectedStage);
+            bool fuelTankUpdated = rocket.Stages[selectedStage].UpdateFuelTankConfiguration(newFuelTank, rocket.StageSizeRestraint(selectedStage), selectedStage);
 
             if (fuelTankUpdated == true)
             {
@@ -513,7 +513,7 @@ namespace Computer_Science_Coursework
         private void numEnginesNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             int newNumEngines = (int)numEnginesNumericUpDown.Value; //Get the new number of engines from the numeric up down
-            bool enginesUpdated = rocket.Stages[selectedStage].updateEngineConfiguration(newNumEngines); //Update the engine configuration based on the new number of engines
+            bool enginesUpdated = rocket.Stages[selectedStage].UpdateEngineConfiguration(newNumEngines); //Update the engine configuration based on the new number of engines
 
             if (enginesUpdated == true)
             {
@@ -531,11 +531,11 @@ namespace Computer_Science_Coursework
 
         private void SelectPayload(Payload selectedPayload)
         {
-            bool payloadUpdated = rocket.updatePayload(selectedPayload); //Update the payload configuration based on the selected payload
+            bool payloadUpdated = rocket.UpdatePayload(selectedPayload); //Update the payload configuration based on the selected payload
             if (payloadUpdated == true)
             {
                 //Update the form graphics and labels (UI):
-                selectedPayload.loadTexture();
+                selectedPayload.LoadTexture();
                 ChangePayloadGraphics();
                 UpdateRocketCostLabel();
             }
@@ -595,19 +595,17 @@ namespace Computer_Science_Coursework
 
         private void launchButton_Click(object sender, EventArgs e)
         {
-            double thrustToWeightRatio = rocket.thrustToWeightRatio(); //Calculate the thrust to weight ratio of the rocket
+            double thrustToWeightRatio = rocket.ThrustToWeightRatio(); //Calculate the thrust to weight ratio of the rocket
            
-            rocket.launchRocketData();
+            rocket.LaunchRocketData();
 
-            MessageBox.Show(rocketCostLabel.Text +" \nThrust-To-Weight Ratio = " + Math.Round(thrustToWeightRatio,2) + "\nDry Mass = " + Math.Round(rocket.DryMass,2) + "\nWet Mass = " + Math.Round(rocket.WetMass,2), "Rocket Data", MessageBoxButtons.OK);
+            MessageBox.Show(rocketCostLabel.Text +" \nThrust-To-Weight Ratio = " + Math.Round(thrustToWeightRatio,2) + "\nDry Mass = " + Math.Round(rocket.DryMass,2) + "Kg\nWet Mass = " + Math.Round(rocket.WetMass,2)+ "Kg", "Rocket Data", MessageBoxButtons.OK);
 
             //Check if the rocket is too heavy to launch:
             if (thrustToWeightRatio > 1)
             {
-                rocket.launchRocketData();
-
                 //Deduct the cost of the rocket from the space agency bank balance:
-                spaceAgency.RemoveFunds(rocket.calcTotalCost());
+                spaceAgency.RemoveFunds(rocket.CalcTotalCost());
 
                 //Update the form graphics and labels (UI), to show launch animation:
                 ControlsVisible(false);

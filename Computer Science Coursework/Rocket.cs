@@ -4,6 +4,8 @@ namespace Computer_Science_Coursework
 {
     internal class Rocket
     {
+        private const double DragCoefficient = 0.5; //unitless
+
         //Fields of Rocket class:
         public string name;
         private Payload payload;
@@ -18,7 +20,7 @@ namespace Computer_Science_Coursework
         private double kineticEnergy;
         private double potentialEnergy;
 
-        private List<Stage> stages = new List<Stage>(); //should not be public
+        private List<Stage> stages = new List<Stage>(); 
 
         //Public accessors for private fields:
         public double DryMass {get { return dryMass; }}
@@ -58,15 +60,15 @@ namespace Computer_Science_Coursework
             //Add stages to rocket based on provided data:
             while (stageIndex < numOfEngines.Count)
             {
-                addStage(fuelTanks[stageIndex], engines[stageIndex], numOfEngines[stageIndex]);
+                AddStage(fuelTanks[stageIndex], engines[stageIndex], numOfEngines[stageIndex]);
                 stageIndex++; 
             }
         }
 
-        public void launchRocketData() //Simulate the launch of the rocket and calculate the final velocity and position for different mission types
+        public void LaunchRocketData() //Simulate the launch of the rocket and calculate the final velocity and position for different mission types
         {
-            this.wetMass = calcTotalWetMass();
-            this.dryMass = calcTotalDryMass();
+            this.wetMass = CalcTotalWetMass();
+            this.dryMass = CalcTotalDryMass();
             GetFinalPositionData();
             this.orbitalXComponent = CalcOrbitalXComponent();
             this.orbitalYComponent = CalcOrbitalYComponent();
@@ -114,34 +116,34 @@ namespace Computer_Science_Coursework
                 return "Error deleting rocket: " + e;
             }
         }
-        private double calcTotalDryMass()
+        private double CalcTotalDryMass()
         {
             //Calculate the total dry mass of the rocket by adding the dry mass of each stage and the payload
             double totalDryMass = payload.Mass;
             for (int stageIndex = 0; stageIndex < stages.Count; stageIndex = stageIndex + 1)
             {
-                totalDryMass = totalDryMass + stages[stageIndex].calcDryMass();
+                totalDryMass = totalDryMass + stages[stageIndex].CalcDryMass();
             }
             return totalDryMass;
         }
-        public double calcTotalCost()
+        public double CalcTotalCost()
         {
             //Calculate the total cost of the rocket by adding the cost of each stage and the payload
             double totalCost = payload.Cost;
             for (int stageIndex = 0; stageIndex < stages.Count; stageIndex = stageIndex + 1)
             {
-                totalCost = totalCost + stages[stageIndex].cost();
+                totalCost = totalCost + stages[stageIndex].Cost();
             }
             return totalCost;
         }
 
-        private double calcTotalWetMass()
+        private double CalcTotalWetMass()
         {
             //Calculate the total wet mass of the rocket by adding the wet mass of each stage and the payload
             double totalWetMass = payload.Mass;
             for (int stageIndex = 0; stageIndex < stages.Count; stageIndex = stageIndex + 1)
             {
-                totalWetMass = totalWetMass + stages[stageIndex].calcWetMass();
+                totalWetMass = totalWetMass + stages[stageIndex].CalcWetMass();
             }
             return totalWetMass;
         }
@@ -167,10 +169,10 @@ namespace Computer_Science_Coursework
             //Iterate through each stage of the rocket and calculate the final velocity and altitude of the rocket
             for (int stageIndex = 0; stageIndex < stages.Count; stageIndex = stageIndex + 1)
             {
-                stageDryMass = stages[stageIndex].calcDryMass();
-                stageWetMass = stages[stageIndex].calcWetMass();
-                stageBurnTime = stages[stageIndex].burnTime();
-                exhaustVelocity = stages[stageIndex].calcExhaustVelocity();
+                stageDryMass = stages[stageIndex].CalcDryMass();
+                stageWetMass = stages[stageIndex].CalcWetMass();
+                stageBurnTime = stages[stageIndex].BurnTime();
+                exhaustVelocity = stages[stageIndex].CalcExhaustVelocity();
 
                 //Calculate the ideal velocity the stage could achieve with no resistance:
                 stageIdealVelocity = CalcIdealVelocity(exhaustVelocity,stageWetMass,stageDryMass);
@@ -181,7 +183,7 @@ namespace Computer_Science_Coursework
                 avgStageAltitude = altitude + ((avgStageVelocity * stageBurnTime) / 2);
 
                 //Calculate the velocity loss due to drag and gravity:
-                velocityLoss = CalcDragVelocityLoss(CalcAirDensityAtAltitude(avgStageAltitude), avgStageVelocity, stages[stageIndex].FuelTank.BaseArea, avgStageMass, stageBurnTime) + (CalcGravityVelocityLoss(CalcfieldStrength(avgStageAltitude), stageBurnTime));
+                velocityLoss = CalcDragVelocityLoss(CalcAirDensityAtAltitude(avgStageAltitude), avgStageVelocity, stages[stageIndex].FuelTank.BaseArea, avgStageMass, stageBurnTime) + (CalcGravityVelocityLoss(CalcFieldStrength(avgStageAltitude), stageBurnTime));
 
                 //Calculate the velocity and altitude gain of the stage after accounting for resistance:
                 stageVelocityGain = stageIdealVelocity - velocityLoss;
@@ -192,8 +194,8 @@ namespace Computer_Science_Coursework
                 altitude = altitude + stageAltitudeGain;
 
                 //Update the dry and wet mass of the rocket after the stage has been jettisoned:
-                rocketDryMass = rocketDryMass - stages[stageIndex].calcDryMass();
-                rocketWetMass = rocketWetMass - stages[stageIndex].calcWetMass();
+                rocketDryMass = rocketDryMass - stages[stageIndex].CalcDryMass();
+                rocketWetMass = rocketWetMass - stages[stageIndex].CalcWetMass();
 
             }
             //Set the final velocity and altitude of the rocket:
@@ -209,13 +211,13 @@ namespace Computer_Science_Coursework
         { //Calculate the ideal velocity a stage could achieve with no resistance
             return exhaustVelocity * Math.Log(wetMass / dryMass);
         }
-        private double CalcfieldStrength(double altitude)
+        private double CalcFieldStrength(double altitude)
         { //Calculate the gravitational field strength at a given altitude
             return (AstroConstants.GravitationalConstant * AstroConstants.Mass) / ((AstroConstants.Radius + altitude) * (AstroConstants.Radius + altitude));
         }
         private double CalcDragVelocityLoss(double airDensity, double velocity, double baseArea, double mass, double time)
         { //Calculate the velocity loss due to drag over a given time period
-            double dragForce = 0.5 * airDensity * velocity * velocity * AstroConstants.DragCoefficient * baseArea;
+            double dragForce = 0.5 * airDensity * velocity * velocity * DragCoefficient * baseArea;
             return (dragForce / mass) * time;
         }
         private double CalcGravityVelocityLoss(double fieldStrength, double time)
@@ -284,13 +286,13 @@ namespace Computer_Science_Coursework
             }
             return missionSuccess;
         }
-        public double thrustToWeightRatio()
+        public double ThrustToWeightRatio()
         { //Calculate the thrust to weight ratio of the rocket:
-            double thrust = stages[0].totalThrust();
-            double rocketWeight = calcTotalWetMass() * AstroConstants.Gravity;
+            double thrust = stages[0].TotalThrust();
+            double rocketWeight = CalcTotalWetMass() * AstroConstants.Gravity;
             return thrust / rocketWeight;
         }
-        public void addStage(FuelTank defaultFuelTank, Engine defaultEngine, int numOfEngines)
+        public void AddStage(FuelTank defaultFuelTank, Engine defaultEngine, int numOfEngines)
         { //Add a new stage to the rocket:
             stages.Add(new Stage(defaultFuelTank, defaultEngine, stages.Count(), numOfEngines));
         }
@@ -306,7 +308,7 @@ namespace Computer_Science_Coursework
                return true;
             }
         }
-        public double stageSizeRestraint(int selectedStage)
+        public double StageSizeRestraint(int selectedStage)
         { //Calculate the size restraint of a stage based on the diameter of the connecting stage:
             double sizeRestraint = 0;
             if (selectedStage == 0 && stages.Count == 1)
@@ -325,7 +327,7 @@ namespace Computer_Science_Coursework
             }
             return sizeRestraint;
         }
-        public bool updatePayload(Payload newPayload)
+        public bool UpdatePayload(Payload newPayload)
         { //Update the payload of the rocket and validate that the payload can fit on the rocket:
             bool payloadUpdated = false;
             int numOfStages = stages.Count();

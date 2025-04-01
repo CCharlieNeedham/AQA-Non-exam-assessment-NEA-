@@ -11,6 +11,7 @@ namespace Computer_Science_Coursework
     {
         const double costPerMetreSquared = 150; //£
         const double materialDensity = 7850; //kg/m^2
+        const double thickness = 0.01; //m
 
         //Fields of FuelTank class:
         private double radius; //m
@@ -67,14 +68,14 @@ namespace Computer_Science_Coursework
         }
         private double CalcCost()
         {
-            return surfaceArea * costPerMetreSquared;
+            return surfaceArea * costPerMetreSquared * thickness;
         }
         private double CalcMass()
         {
-            return surfaceArea * materialDensity * 0.005;
+            return surfaceArea * materialDensity * thickness;
         }
 
-        public override string description() //Returns a string with the engine's properties
+        public override string Description() //Returns a string with the engine's properties
         {
             return ("Size: " + diameter.ToString("N0") + "x" + height.ToString("N0") + "Metres \nMass: " + mass.ToString("N0") + "kg \nCost: £" + cost.ToString("N0") + "\n Volume: " + volume.ToString("N0") + "m^3");
         }

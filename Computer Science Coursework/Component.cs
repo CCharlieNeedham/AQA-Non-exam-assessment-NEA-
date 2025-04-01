@@ -52,11 +52,11 @@ namespace Computer_Science_Coursework
             this.diameter = diameter;
             this.textureFileName = textureFileName;
         }
-        public virtual string description() //Returns a string with the component's properties
+        public virtual string Description() //Returns a string with the component's properties
         {
             return ("Size: " + diameter.ToString("N0") + "x" + height.ToString("N0") + "Metres \nMass: " + mass.ToString("N0") + "kg \nCost: £" + cost.ToString("N0"));
         }
-        public void loadTexture() //Trys to load the texture image for the component from the resources
+        public void LoadTexture() //Trys to load the texture image for the component from the resources
         {
             try 
             {

@@ -11,7 +11,6 @@ namespace Computer_Science_Coursework
     {
         //Physical Constants:
         public const double GravitationalConstant = 6.67430e-11; //N m^2 kg^-2
-        public const double DragCoefficient = 0.5; //unitless
 
         //Planet Constants:
         public const double Mass = 6.39e23; //kg
@@ -24,6 +23,6 @@ namespace Computer_Science_Coursework
 
         //UI Constants:
         public const double Scaler = 25; //Unitless
-        public const double ClippingHeight  = 1000000; //m
+        public const double ClippingHeight  = 1100000; //m
     }
 }
