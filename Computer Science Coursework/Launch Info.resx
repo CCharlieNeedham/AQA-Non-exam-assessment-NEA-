@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="simulationDescriptionLabel.Text" xml:space="preserve">
+    <value>Firstly the Tsiolkovsky Rocket Equation is used to estimate the ideal velocity change for each stage, while drag and gravity losses are accounted for by the drag force equation and gravitational field strength equation. These losses are then subtracted from the ideal velocity to give a more accurate estimate of the rocket's velocity at each stage. As the rocket ascends the air density and gravitational forces decrease, this change is thus implemented into the calculations by moddelling air density as an exponential decay and using the more field strength equations. The SUVAT equation is then used to compute the maximum distance traveled during each stage and these distances are added up to find the total distance traveled by the rocket. This total distance is then divided between the Y and X components based on the rocket’s mission type, such as orbital or suborbital, to give a more precise trajectory. Finally the kinetic and potential energy equations then calculate the rocket's energy at the peak of its flight, combining the effects of velocity and altitude. </value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

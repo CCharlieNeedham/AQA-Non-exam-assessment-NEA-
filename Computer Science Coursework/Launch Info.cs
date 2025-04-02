@@ -177,7 +177,9 @@
 
         private void informationButton_Click(object sender, EventArgs e)
         {
-
+            //Toggle the visibility of the simulation description:
+            SimulationDescriptionGroupBox.Visible = !SimulationDescriptionGroupBox.Visible;
         }
+
     }
 }

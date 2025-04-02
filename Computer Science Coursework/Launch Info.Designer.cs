@@ -39,7 +39,10 @@
             achievedAltitudeLabel = new Label();
             mainMenuButton = new Button();
             informationButton = new Button();
+            simulationDescriptionLabel = new Label();
+            SimulationDescriptionGroupBox = new GroupBox();
             reportGroupBox.SuspendLayout();
+            SimulationDescriptionGroupBox.SuspendLayout();
             SuspendLayout();
             // 
             // reportGroupBox
@@ -154,6 +157,28 @@
             informationButton.UseVisualStyleBackColor = true;
             informationButton.Click += informationButton_Click;
             // 
+            // simulationDescriptionLabel
+            // 
+            simulationDescriptionLabel.Font = new Font("Verdana", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            simulationDescriptionLabel.Location = new Point(0, 23);
+            simulationDescriptionLabel.Name = "simulationDescriptionLabel";
+            simulationDescriptionLabel.Size = new Size(588, 260);
+            simulationDescriptionLabel.TabIndex = 26;
+            simulationDescriptionLabel.Text = resources.GetString("simulationDescriptionLabel.Text");
+            // 
+            // SimulationDescriptionGroupBox
+            // 
+            SimulationDescriptionGroupBox.BackColor = Color.Bisque;
+            SimulationDescriptionGroupBox.Controls.Add(simulationDescriptionLabel);
+            SimulationDescriptionGroupBox.Font = new Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            SimulationDescriptionGroupBox.Location = new Point(12, 139);
+            SimulationDescriptionGroupBox.Name = "SimulationDescriptionGroupBox";
+            SimulationDescriptionGroupBox.Size = new Size(588, 284);
+            SimulationDescriptionGroupBox.TabIndex = 27;
+            SimulationDescriptionGroupBox.TabStop = false;
+            SimulationDescriptionGroupBox.Text = "Simulation Description";
+            SimulationDescriptionGroupBox.Visible = false;
+            // 
             // Launch_Info
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -161,6 +186,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(SimulationDescriptionGroupBox);
             Controls.Add(informationButton);
             Controls.Add(mainMenuButton);
             Controls.Add(achievedAltitudeLabel);
@@ -175,6 +201,7 @@
             Paint += Launch_Info_Paint;
             reportGroupBox.ResumeLayout(false);
             reportGroupBox.PerformLayout();
+            SimulationDescriptionGroupBox.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -192,5 +219,7 @@
         private Label labelPotentialEnergy;
         private Button button1;
         private Button informationButton;
+        private Label simulationDescriptionLabel;
+        private GroupBox SimulationDescriptionGroupBox;
     }
 }
