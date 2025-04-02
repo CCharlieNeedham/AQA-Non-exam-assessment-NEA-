@@ -27,7 +27,7 @@
 
         private void LaunchReport()
         {
-            Double componentY = 0;
+            double componentY = 0;
             //Check if was mission was a obrital or sub-orbital mission and change labels:
             if (spaceAgency.ActiveMission.Orbital == true)
             {
