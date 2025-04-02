@@ -13,12 +13,20 @@ namespace Computer_Science_Coursework
         private double wetMass;
         private double finalVelocity;
         private double maxAltitude;
-        private double orbitalYComponent;
-        private double orbitalXComponent;
-        private double suborbitalYComponent;
-        private double suborbitalXComponent;
         private double kineticEnergy;
         private double potentialEnergy;
+
+        Dictionary<string, double> orbitalComponents = new Dictionary<string, double>()
+            {
+                {"X", 0},
+                {"Y", 0}
+            };
+
+        Dictionary<string, double> subOrbitalComponents = new Dictionary<string, double>()
+            {
+                {"X", 0},
+                {"Y", 0}
+            };
 
         private List<Stage> stages = new List<Stage>(); 
 
@@ -27,10 +35,8 @@ namespace Computer_Science_Coursework
         public double WetMass { get { return wetMass; } }
         public double FinalVelocity {  get { return finalVelocity; } }
         public double MaxAltitude { get { return maxAltitude; } }
-        public double OrbitalYComponent { get { return orbitalYComponent; } }
-        public double OrbitalXComponent { get { return orbitalXComponent; } }
-        public double SuborbitalYComponent { get { return suborbitalYComponent; } }
-        public double SubOrbitalXComponent { get { return suborbitalXComponent;} }
+        public Dictionary<string,double> SubOrbitalComponents { get { return subOrbitalComponents; } }
+        public Dictionary<string, double> OrbitalComponents { get { return orbitalComponents; } }
         public double KineticEnergy { get { return kineticEnergy; } }
         public double PotentialEnergy { get { return potentialEnergy; } }
 
@@ -70,10 +76,10 @@ namespace Computer_Science_Coursework
             this.wetMass = CalcTotalWetMass();
             this.dryMass = CalcTotalDryMass();
             GetFinalPositionData();
-            this.orbitalXComponent = CalcOrbitalXComponent();
-            this.orbitalYComponent = CalcOrbitalYComponent();
-            this.suborbitalXComponent = CalcSuborbitalXComponent(); 
-            this.suborbitalYComponent = CalcSuborbitalYComponent();
+            this.orbitalComponents["X"] = CalcOrbitalXComponent();
+            this.orbitalComponents["Y"] = CalcOrbitalYComponent();
+            this.subOrbitalComponents["X"] = CalcSuborbitalXComponent();
+            this.subOrbitalComponents["Y"] = CalcSuborbitalYComponent();
             this.potentialEnergy = CalcPE(this.maxAltitude, payload.Mass);
             this.kineticEnergy = CalcKE(payload.Mass, this.finalVelocity);
 
@@ -260,11 +266,11 @@ namespace Computer_Science_Coursework
         public bool MissionAltitudeSuccess(bool orbital, double altitude)
         { //Check if the rocket has achieved the required altitude for the mission:
             bool missionSuccess = false;
-            if (orbital == true && this.orbitalYComponent >= altitude)
+            if (orbital == true && this.orbitalComponents["Y"] >= altitude)
             {
                 missionSuccess = true;
             }
-            else if (orbital == false && this.suborbitalYComponent >= altitude)
+            else if (orbital == false && this.orbitalComponents["Y"] >= altitude)
             {
                 missionSuccess = true;
             } 

@@ -32,17 +32,17 @@
             if (spaceAgency.ActiveMission.Orbital == true)
             {
                 trajectoryTypeLabel.Text = trajectoryTypeLabel.Text + " Orbital";
-                componentY = Math.Round(rocket.OrbitalYComponent, 2);
+                componentY = Math.Round(rocket.OrbitalComponents["Y"], 2);
 
             }
             else if (spaceAgency.ActiveMission.Orbital == false)
             {
                 trajectoryTypeLabel.Text = trajectoryTypeLabel.Text + " Sub-Orbital";
-                componentY = Math.Round(rocket.SuborbitalYComponent, 2);
+                componentY = Math.Round(rocket.SubOrbitalComponents["Y"], 2);
 
             }
 
-            achievedAltitudeLabel.Text = achievedAltitudeLabel.Text + Math.Round(rocket.SuborbitalYComponent, 2).ToString("N0") + " Metres";
+            achievedAltitudeLabel.Text = achievedAltitudeLabel.Text + Math.Round(rocket.SubOrbitalComponents["Y"], 2).ToString("N0") + " Metres";
 
             //Display an error if the rocket trajectory is to high for the UI to display:
             if (componentY > AstroConstants.ClippingHeight)
@@ -116,17 +116,17 @@
             //Calculate the dimesions of the rockets trajectory & plot rockets final orbit (if obrital):
             if (isOrbital == false)
             {
-                rocketXComponentLength = (MetresToPixels(rocket.SubOrbitalXComponent));
-                rocketYComponentLength = (MetresToPixels(rocket.SuborbitalYComponent));
+                rocketXComponentLength = (MetresToPixels(rocket.SubOrbitalComponents["X"]));
+                rocketYComponentLength = (MetresToPixels(rocket.SubOrbitalComponents["Y"]));
                 trajectorySweepAngle = 180;
 
             }
             else if (isOrbital == true)
             {
-                rocketXComponentLength = (MetresToPixels(rocket.OrbitalXComponent));
-                rocketYComponentLength = (MetresToPixels(rocket.OrbitalYComponent));
+                rocketXComponentLength = (MetresToPixels(rocket.OrbitalComponents[""]));
+                rocketYComponentLength = (MetresToPixels(rocket.OrbitalComponents["Y"]));
 
-                if (rocket.OrbitalYComponent >= AstroConstants.StableOrbit)
+                if (rocket.OrbitalComponents["Y"] >= AstroConstants.StableOrbit)
                 {
                     trajectorySweepAngle = 90;
                     //Draw curve to represent the rockets highest achievable orbit:
