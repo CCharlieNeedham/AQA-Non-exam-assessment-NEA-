@@ -19,7 +19,7 @@ namespace Computer_Science_Coursework
         private List<FuelTank> fuelTanks = new List<FuelTank>();//List of all possible fuel tanks
         private int selectedStage;
         private Brush fairingBrush = new HatchBrush(HatchStyle.Vertical, Color.Gray, Color.LightGray); //Brush for fairing between stages
-        
+
         //Dictionaries to map fuel tank names to their dimensions:
         private Dictionary<string, double> tankHeights = new Dictionary<string, double>()
         {
@@ -44,11 +44,11 @@ namespace Computer_Science_Coursework
         private Engine raptor = new Engine(thrust: 2530000, massFlow: 650, fuelType: FuelType.Methane, name: "Raptor", height: 3, diameter: 2, textureFileName: "Raptor", mass: 1600, cost: 10000000, fuelRatio: 3.6);
 
         //Payload definitions
-        private Payload extraSmallPayload = new Payload(name: "Extra Small Payload", height: 2, diameter: 2, textureFileName: "UncrewedPayload", mass: 4000, cost: 20000, crewed: false);
-        private Payload smallPayload = new Payload(name: "Small Payload", height: 4, diameter: 4, textureFileName: "CrewedPayload", mass: 8000, cost: 40000, crewed: true);
-        private Payload mediumPayload = new Payload(name: "Medium Payload", height: 6, diameter: 6, textureFileName: "CrewedPayload", mass: 12000, cost: 60000, crewed: true);
-        private Payload largePayload = new Payload(name: "Large Payload", height: 8, diameter: 8, textureFileName: "UncrewedPayload", mass: 16000, cost: 80000, crewed: false);
-        private Payload extraLargePayload = new Payload(name: "Extra Large Payload", height: 10, diameter: 10, textureFileName: "UncrewedPayload", mass: 20000, cost: 100000, crewed: false);
+        private Payload extraSmallPayload = new Payload(name: "Extra Small Payload", height: 2, diameter: 2, textureFileName: "UncrewedPayload", mass: 1000, cost: 20000, crewed: false);
+        private Payload smallPayload = new Payload(name: "Small Payload", height: 4, diameter: 4, textureFileName: "CrewedPayload", mass: 2000, cost: 40000, crewed: true);
+        private Payload mediumPayload = new Payload(name: "Medium Payload", height: 6, diameter: 6, textureFileName: "CrewedPayload", mass: 4000, cost: 60000, crewed: true);
+        private Payload largePayload = new Payload(name: "Large Payload", height: 8, diameter: 8, textureFileName: "UncrewedPayload", mass: 8000, cost: 80000, crewed: false);
+        private Payload extraLargePayload = new Payload(name: "Extra Large Payload", height: 10, diameter: 10, textureFileName: "UncrewedPayload", mass: 16000, cost: 100000, crewed: false);
 
 
         internal Rocket_Designer(SpaceAgency spaceAgency) //Constructor for the creation of a new rocket
@@ -80,10 +80,12 @@ namespace Computer_Science_Coursework
             LoadRocket(rocketFileName); //load data from the file
 
             //load rocket graphics:
-            payloadPic.Show();
+            payloadPic.Visible = true;
             selectedStage = 0; //Set selected stage to the first stage
 
             Stage1Visible(true);
+            Stage2Visible(false);
+
             stage1Button.Checked = true;
 
             ChangeEngineGraphic();
@@ -97,7 +99,6 @@ namespace Computer_Science_Coursework
                 ChangeFuelTankGraphic();
                 stage2Button.Checked = true;
             }
-
             ChangePayloadGraphics();
             UpdateRocketCostLabel();
             numEnginesNumericUpDown.Value = rocket.Stages[selectedStage].NumOfEngines;
@@ -110,7 +111,7 @@ namespace Computer_Science_Coursework
             List<Engine> rocketEngines = new List<Engine>();
             List<FuelTank> rocketFuelTanks = new List<FuelTank>();
             List<int> rocketNumOfEngines = new List<int>();
-                      
+
             string fuelTankName;
 
             string filePathName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Rocket Designs", rocketFileName);
@@ -174,6 +175,10 @@ namespace Computer_Science_Coursework
                 }
                 //load the rocket with the data:
                 rocket = new Rocket(rocketFileName, rocketPayload, rocketFuelTanks, rocketEngines, rocketNumOfEngines);
+
+                //Load payload graphics:
+                rocketPayload.LoadTexture();
+
             }
 
         }
@@ -260,7 +265,7 @@ namespace Computer_Science_Coursework
 
             //lock the launch button if the rocket controls are not visible
             launchButton.Enabled = visible;
-            if (visible == false) 
+            if (visible == false)
             {
                 launchButton.Text = "🔒";
             }
@@ -296,7 +301,7 @@ namespace Computer_Science_Coursework
             double rocketCost = Math.Round(rocket.CalcTotalCost(), 2);//Calculate the total rocket cost and round to two decimal places
 
             //Update the rocket cost label with the new cost:
-            rocketCostLabel.Text = ("Rocket Cost: £" + rocketCost.ToString("N0"));
+            rocketCostLabel.Text = ("Rocket Cost: £" + rocketCost.ToString());
 
             //Change the colour of the label based on if the rocket cost is greater than the bank balance:
             if (rocketCost > spaceAgency.BankBalance)
@@ -323,7 +328,7 @@ namespace Computer_Science_Coursework
                 }
 
                 //Add the first stage with a default fuel tank, payload and engine
-                rocket.AddStage(fuelTanks[6], rd180, 1);                
+                rocket.AddStage(fuelTanks[6], rd180, 1);
                 selectedStage = 0;
                 Stage1Visible(true);
                 stage1Button.Checked = true;
@@ -461,7 +466,7 @@ namespace Computer_Science_Coursework
             payloadPic.Width = newPayloadWidth;
             payloadPic.Height = newPayloadHeight;
             payloadPic.Image = rocket.Payload.TextureImage;
-            if (rocket.Stages.Count - 1 == 0)
+            if (rocket.Stages.Count() - 1 == 0)
             {
                 payloadPic.Location = new Point(rocketCenterline - newPayloadWidth / 2, fuelTankPic1.Location.Y - newPayloadHeight);
             }
@@ -596,10 +601,10 @@ namespace Computer_Science_Coursework
         private void launchButton_Click(object sender, EventArgs e)
         {
             double thrustToWeightRatio = rocket.ThrustToWeightRatio(); //Calculate the thrust to weight ratio of the rocket
-           
+
             rocket.LaunchRocketData();
 
-            MessageBox.Show(rocketCostLabel.Text +" \nThrust-To-Weight Ratio = " + Math.Round(thrustToWeightRatio,2) + "\nDry Mass = " + Math.Round(rocket.DryMass,2) + "Kg\nWet Mass = " + Math.Round(rocket.WetMass,2)+ "Kg", "Rocket Data", MessageBoxButtons.OK);
+            MessageBox.Show("Thrust-To-Weight Ratio = " + Math.Round(thrustToWeightRatio, 2) + "\nDry Mass = " + Math.Round(rocket.DryMass, 2) + "Kg\nWet Mass = " + Math.Round(rocket.WetMass, 2) + "Kg", "Rocket Data", MessageBoxButtons.OK);
 
             //Check if the rocket is too heavy to launch:
             if (thrustToWeightRatio > 1)
@@ -629,7 +634,7 @@ namespace Computer_Science_Coursework
         }
 
         private void launchTimer_Tick(object sender, EventArgs e) //Timer for launch animation
-        { 
+        {
             launchTimer.Stop();
             Launch_Info Launch_Info = new Launch_Info(rocket, spaceAgency); //Create a new launch info form
             Launch_Info.Show();
@@ -640,7 +645,7 @@ namespace Computer_Science_Coursework
         {
             //Update the budget label with the space agency bank balance:
             double budget = Math.Round(spaceAgency.BankBalance, 2);
-            budgetLabel.Text = "Budget: £" + budget.ToString("N0");
+            budgetLabel.Text = "Budget: £" + budget.ToString("");
         }
 
 
@@ -656,7 +661,7 @@ namespace Computer_Science_Coursework
         }
 
         private void launchPictureBox_Paint(object sender, PaintEventArgs e)
-        { 
+        {
             //Draw fairing between stages for launch animation if there are multiple stages:
             if (rocket.Stages.Count > 1)
             {
@@ -677,13 +682,15 @@ namespace Computer_Science_Coursework
             if (string.IsNullOrWhiteSpace(inputRocketName) == false)
             {
                 rocket.name = inputRocketName;
+                MessageBox.Show(rocket.SaveRocket(), "Info");
+            }else
+            {
+                MessageBox.Show("Rocket name cannot be null or white space", "Info");
             }
-            MessageBox.Show(rocket.SaveRocket(), "Info");
         }
 
         private void deleteRocketButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Path.Combine(AppDomain.CurrentDomain.BaseDirectory));
             if (Interaction.MsgBox("Are you sure you want to delete this rocket file?", MsgBoxStyle.YesNo, "Delete Rocket") == MsgBoxResult.Yes)
             {
                 MessageBox.Show(rocket.DeleteRocket(), "Info");
@@ -782,11 +789,11 @@ namespace Computer_Science_Coursework
         }
         private void rd180Button_Click(object sender, EventArgs e)
         {
-            selectEngine(rd180); 
+            selectEngine(rd180);
         }
         private void f1Button_Click(object sender, EventArgs e)
         {
-            selectEngine(f1); 
+            selectEngine(f1);
         }
 
         //Payload buttons:
@@ -825,6 +832,11 @@ namespace Computer_Science_Coursework
         private void largePayloadButton_Click_1(object sender, EventArgs e)
         {
             SelectPayload(largePayload);
+        }
+
+        private void rocketCostLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

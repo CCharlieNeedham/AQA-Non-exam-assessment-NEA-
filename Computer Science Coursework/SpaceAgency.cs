@@ -21,7 +21,7 @@
 
         public SpaceAgency()
         {
-            this.bankBalance = 1000000000;
+            this.bankBalance = 100000000;
             this.name = "Untitled Space Agency";
             InitializeMissions();
             activeMission = missions.Dequeue();

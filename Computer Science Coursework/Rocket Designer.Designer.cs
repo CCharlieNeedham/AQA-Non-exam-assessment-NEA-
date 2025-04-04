@@ -672,6 +672,7 @@
             rocketCostLabel.Size = new Size(163, 23);
             rocketCostLabel.TabIndex = 21;
             rocketCostLabel.Text = "Rocket Cost: £0";
+            rocketCostLabel.Click += rocketCostLabel_Click;
             // 
             // mainMenuButton
             // 

@@ -11,7 +11,7 @@ namespace Computer_Science_Coursework
             this.DoubleBuffered = true; //Reduce flickering for UI rendering
             InitializeComponent();
             spaceAgency = new SpaceAgency();
-            bankBalanceLabel.Text = "Bank Balance: £" + Math.Round(spaceAgency.BankBalance, 2).ToString("N0");
+            bankBalanceLabel.Text = "Bank Balance: £" + Math.Round(spaceAgency.BankBalance, 2).ToString();
             UpdateMissionPanel();
 
 
@@ -24,7 +24,7 @@ namespace Computer_Science_Coursework
 
             //Create UI elements with exsisting spaceAgency data:
             spaceAgencyTextbox.Text = spaceAgency.name;
-            bankBalanceLabel.Text = "Bank Balance: £" + Math.Round(spaceAgency.BankBalance, 2).ToString("N0");
+            bankBalanceLabel.Text = "Bank Balance: £" + Math.Round(spaceAgency.BankBalance, 2).ToString();
             UpdateMissionPanel();
         }
 
@@ -41,24 +41,26 @@ namespace Computer_Science_Coursework
             //Attempt to load the rocket designer form with exsisting rocket data from a text file:
             string inputRocketName = Interaction.InputBox("Enter a name for the rocket you wish to load", "Load Rocket");
             string filePathName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Rocket Designs", inputRocketName);
-            if (File.Exists(filePathName) == true)
+            if (inputRocketName != "")
             {
-                try
+                if (File.Exists(filePathName) == true)
                 {
-                    Rocket_Designer rocket_Designer = new Rocket_Designer(spaceAgency, inputRocketName);
-                    rocket_Designer.Show();
-                    this.Hide();
+                    try
+                    {
+                        Rocket_Designer rocket_Designer = new Rocket_Designer(spaceAgency, inputRocketName);
+                        rocket_Designer.Show();
+                        this.Hide();
+                    }
+                    catch (Exception error)
+                    {
+                        MessageBox.Show("Error loading file: " + error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                catch (Exception error)
+                else
                 {
-                    MessageBox.Show("Error loading file: " + error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Rocket design not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
-            {
-                MessageBox.Show("Rocket design not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
         }
 
         private void viewMissionsButton_Click(object sender, EventArgs e)

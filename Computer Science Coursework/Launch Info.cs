@@ -69,10 +69,10 @@
 
             }
             //Update the UI with the rockets final velocity:
-            finalVelocityLabel.Text = finalVelocityLabel.Text + "Final Velocity: " + Math.Round(rocket.FinalVelocity, 2).ToString("N0") + " m/s";
-            targetAltitudeLabel.Text = targetAltitudeLabel.Text + "Target Altitude: " + spaceAgency.ActiveMission.Altitude.ToString("N0") + " Metres";
-            labelKineticEnergy.Text = labelKineticEnergy.Text + "Kinetic Energy: " + Math.Round(rocket.KineticEnergy, 2).ToString("N0") + " Joules";
-            labelPotentialEnergy.Text = labelPotentialEnergy.Text + "Potential Energy: " + Math.Round(rocket.PotentialEnergy, 1).ToString("N0") + " Joules";
+            finalVelocityLabel.Text = finalVelocityLabel.Text  + Math.Round(rocket.FinalVelocity, 2).ToString("N0") + " m/s";
+            targetAltitudeLabel.Text = targetAltitudeLabel.Text + spaceAgency.ActiveMission.Altitude.ToString("N0") + " Metres";
+            labelKineticEnergy.Text = labelKineticEnergy.Text +  Math.Round(rocket.KineticEnergy, 2).ToString("N0") + " Joules";
+            labelPotentialEnergy.Text = labelPotentialEnergy.Text  + Math.Round(rocket.PotentialEnergy, 1).ToString("N0") + " Joules";
         }
 
         private void Launch_Info_Paint(object sender, PaintEventArgs e)
@@ -123,7 +123,7 @@
             }
             else if (isOrbital == true)
             {
-                rocketXComponentLength = (MetresToPixels(rocket.OrbitalComponents[""]));
+                rocketXComponentLength = (MetresToPixels(rocket.OrbitalComponents["X"]));
                 rocketYComponentLength = (MetresToPixels(rocket.OrbitalComponents["Y"]));
 
                 if (rocket.OrbitalComponents["Y"] >= AstroConstants.StableOrbit)
